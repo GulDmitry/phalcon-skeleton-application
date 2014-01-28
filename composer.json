@@ -1,0 +1,26 @@
+{
+    "name": "MusDiff",
+    "description": "Phalcon application",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "framework",
+        "phalcon"
+    ],
+
+    "config": {
+        "component-dir": "vendor"
+    },
+
+    "require": {
+        "php": ">=5.4",
+        "phalcon/devtools": "dev-master",
+        "twitter/bootstrap": "3.*",
+        "components/jquery": "2.*"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Core\\": "vendor/Core/"
+        }
+    }
+}
