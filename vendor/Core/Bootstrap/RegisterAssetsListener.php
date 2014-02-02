@@ -21,7 +21,7 @@ class RegisterAssetsListener
         $manager = $di->getShared('assets');
 
         $this->setupJS($application, $manager);
-        $this->setupCss($application, $manager);
+        $this->setupCss($application, $manager, false);
     }
 
     /**
@@ -32,15 +32,16 @@ class RegisterAssetsListener
     {
         $di = $application->getDI();
         $config = $di->get('config');
+        $finalName = 'header.compiled.js';
 
         $jsCollection = $manager->collection('headerJs')
-            ->setTargetPath(PUBLIC_PATH . '/js/header.js')
-            ->setTargetUri('js/header.js')
+            ->setTargetPath(PUBLIC_PATH . '/js/' . $finalName)
+            ->setTargetUri('js/' . $finalName)
             ->setFilters([new None()])
         ;
 
-        if ($config->assetsCache->enabled && file_exists(PUBLIC_PATH . '/js/header.js')) {
-            $jsCollection->addJs(PUBLIC_PATH . '/js/header.js');
+        if ($config->assetsCache->enabled && file_exists(PUBLIC_PATH . '/js/' . $finalName)) {
+            $jsCollection->addJs(PUBLIC_PATH . '/js/' . $finalName);
             return;
         }
 
@@ -63,19 +64,30 @@ class RegisterAssetsListener
      * @param \Phalcon\Mvc\Application $application
      * @param Manager $manager
      */
-    public function setupCss(\Phalcon\Mvc\Application $application, \Phalcon\Assets\Manager $manager)
+    public function setupCss(\Phalcon\Mvc\Application $application, \Phalcon\Assets\Manager $manager, $isLess = false)
     {
         $di = $application->getDI();
         $config = $di->get('config');
+        $finalName = 'header.compiled.css';
 
         $cssCollection = $manager->collection('headerCss')
-            ->setTargetPath(PUBLIC_PATH . '/css/header.css')
-            ->setTargetUri('css/header.css')
+            ->setTargetPath(PUBLIC_PATH . '/css/' . $finalName)
+            ->setTargetUri('css/' .  $finalName)
             ->setFilters([new None()])
         ;
 
-        if ($config->assetsCache->enabled && file_exists(PUBLIC_PATH . '/css/header.css')) {
-            $cssCollection->addCss(PUBLIC_PATH . '/css/header.css');
+        if ($config->assetsCache->enabled && file_exists(PUBLIC_PATH . '/css/' . $finalName)) {
+            $cssCollection->addCss(PUBLIC_PATH . '/css/' . $finalName);
+            return;
+        }
+
+        if ($isLess) {
+            // TODO: check when https://github.com/leafo/lessphp/issues/498 is fixed.
+            $lessPhp = new \lessc();
+            $lessPhp->setVariables([
+                'twitterBootstrap' => '"' . VENDOR_PATH . '/twitter/bootstrap/less/bootstrap.less' . '"',
+            ]);
+            $lessPhp->compileFile(PUBLIC_PATH . '/less/custom.less', PUBLIC_PATH . '/css/' . $finalName);
             return;
         }
 

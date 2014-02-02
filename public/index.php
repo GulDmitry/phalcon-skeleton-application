@@ -1,6 +1,7 @@
 <?php
 
 defined('APPLICATION_PATH') || define('APPLICATION_PATH', realpath(__DIR__ . '/..'));
+defined('DATA_PATH') || define('DATA_PATH', realpath(__DIR__ . '/../data'));
 defined('VENDOR_PATH') || define('VENDOR_PATH', realpath(__DIR__ . '/../vendor'));
 defined('PUBLIC_PATH') || define('PUBLIC_PATH', __DIR__);
 

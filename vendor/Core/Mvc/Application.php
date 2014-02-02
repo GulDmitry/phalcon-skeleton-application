@@ -29,6 +29,8 @@ class Application extends MvcApplication
         'Core\Bootstrap\RegisterAssetsListener',
         'Core\Bootstrap\RegisterUrlListener',
         'Core\Bootstrap\RegisterViewListener',
+        // TODO: enable when ready.
+//        'Core\Bootstrap\RegisterTranslationListener',
 
         // bootstrap:beforeMergeConfig
 

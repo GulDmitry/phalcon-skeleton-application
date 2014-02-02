@@ -2,9 +2,9 @@
 
 namespace Core\Bootstrap;
 
-use Phalcon\Mvc\View;
-use Phalcon\Mvc\View\Engine\Volt;
-use Phalcon\Tag;
+use Phalcon\Mvc\View,
+    Phalcon\Mvc\View\Engine\Volt,
+    Phalcon\Tag;
 
 class RegisterViewListener
 {
