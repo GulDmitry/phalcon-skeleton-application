@@ -2,46 +2,71 @@
 
 namespace Core\Bootstrap;
 
-use Phalcon\Translate\Adapter\NativeArray as Adapter;
+use Phalcon\Translate\Adapter\NativeArray as Adapter,
+    Phalcon\Tag,
+    Phalcon\Http\Response\Cookies;
 
 class RegisterTranslationListener
 {
-    public function init($event, $application)
-    {
-        $di = $application->getDI();
-
-        /**
-         * Setting up the translation component.
-         */
-        $di->setShared('translation', new Adapter());
-    }
-
     public function afterMergeConfig($event, $application)
     {
         $di = $application->getDI();
-        $view = $di->getShared('view');
+        $config = $di->getShared('config');
 
-        // Ask browser what is the best language
-        $language = $this->request->getBestLanguage();
+        $cookies = new Cookies();
+        // From cookies or $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+        $language = $cookies->get('lang')->getValue(null, substr($application->request->getBestLanguage(), 0, 2));
+        $path = DATA_PATH . '/language/' . $language . '.php';
 
-        // TODO: check cookie and replace
-        $language = 'en';
-        // TODO: define in config.
-        $defaultLang = 'en';
+        $defaultTranslations = require DATA_PATH . '/language/' . $config->defaultLanguage . '.php';
 
-        $path = DATA_PATH . '/messages/' . $language . '.php';
+        // TODO: Cache interface for this part
+        if ($config->languageCache->enabled) {
+            $storage = $config->languageCache->storage;
+            $lifetime = $config->languageCache->lifetime;
 
-        //Check if we have a translation file for that lang
-        if (file_exists($path)) {
-            $translations = require 'app/messages/' . $language . '.php';
-        } else {
-            // Fallback to default.
-            $translations = require DATA_PATH . '/messages/' . $defaultLang . '.php';
+            $containerClass = $storage->frontend;
+            $container = new $containerClass($lifetime);
+
+            $storageClass = $storage->backend;
+            $cache = new $storageClass($container, (array)$storage->options);
+
+            $cachedLanguage = $cache->get($storage->options->key . '.' . $language, $lifetime);
+
+            if ($cachedLanguage) {
+                $this->fillDI($application, $cachedLanguage);
+                return;
+            }
         }
 
-        $view->setVar('t', new Adapter([
+        //Check if we have a translation file for that lang.
+        if ($language != $config->defaultLanguage && file_exists($path)) {
+            $translations = array_merge($defaultTranslations, require $path);
+        } else {
+            $translations = $defaultTranslations;
+        }
+
+        if ($config->languageCache->enabled) {
+            $cache->save($storage->options->key . '.' . $language, $translations, $lifetime);
+        }
+
+        // TODO: test on untranslated lable.
+        // TODO: CLI task to display all untranslated lables.
+        $this->fillDI($application, $translations);
+    }
+
+    public function fillDI($application, array $translations)
+    {
+        $di = $application->getDI();
+
+        $adapterObj = new Adapter([
             'content' => $translations,
-        ]));
+        ]);
+
+        $di->setShared('t', function () use ($adapterObj) {
+                return $adapterObj;
+            }
+        );
 
     }
 }

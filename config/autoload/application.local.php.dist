@@ -23,7 +23,7 @@ return [
         'debug' => true,
         'baseUri' => 'http://phalcon/',
     ],
-    'configCache' => [
+    'languageCache' => [
         'enabled' => false,
     ],
     'templateOptions' => [

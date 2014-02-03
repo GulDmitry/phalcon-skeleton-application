@@ -15,9 +15,21 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li class="active"><a href="#">{{ t._("LBL_HOME_PAGE") }}</a></li>
+                <li><a href="#about">{{ t._("LBL_ABOUT_PAGE") }}</a></li>
+                <li><a href="#contact">{{ t._("LBL_CONTACT_PAGE") }}</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        {{ t._("LBL_LANGUAGES") }} <b class="caret"></b>
+                    </a>
+                    <ul id="languages" class="dropdown-menu">
+                        {%- for key, lang in config.languages %}
+                            <li><a data-key="{{ key }}" href="#">{{ lang }}</a></li>
+                        {%- endfor %}
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- /.nav-collapse -->
@@ -33,15 +45,10 @@
         {% include view.getLayoutsDir() ~ "sidebar" %}
 
         <div class="col-xs-12 col-sm-9">
-            <p class="pull-right visible-xs">
-                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-            </p>
             <div class="jumbotron">
-
                 {{ content() }}
 
-                <p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some
-                    responsive-range viewport sizes to see it in action.</p>
+                <p>{{ t._("TPL_GREETING_TEXT", ['userName' : 'User From Layout']) }}</p>
             </div>
             <div class="row">
                 <div class="col-6 col-sm-6 col-lg-4">

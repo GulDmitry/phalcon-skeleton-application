@@ -12,7 +12,7 @@ class MergeGlobConfigListener
         $config = $di->get('config');
 
         if (isset($config['configGlobPaths'])) {
-            $globPats = (array) $config['configGlobPaths'];
+            $globPats = (array)$config['configGlobPaths'];
             foreach ($globPats as $path) {
                 $files = glob($path, GLOB_BRACE);
                 foreach ($files as $file) {
@@ -21,7 +21,7 @@ class MergeGlobConfigListener
                         $config->merge($item);
                         continue;
                     }
-                    if (! is_array($item)) {
+                    if (!is_array($item)) {
                         continue;
                     }
                     $item = new Config($item);

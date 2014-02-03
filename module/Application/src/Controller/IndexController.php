@@ -8,7 +8,7 @@ class IndexController extends Controller
 {
     public function indexAction()
     {
-        $this->view->setVar('message', 'Hello, Index Index!');
+        $this->view->setVar('message', $this->t->_('LBL_GREETING'));
     }
 
     public function notFoundAction()

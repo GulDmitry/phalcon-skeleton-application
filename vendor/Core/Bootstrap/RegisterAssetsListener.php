@@ -51,6 +51,7 @@ class RegisterAssetsListener
             // These are local resources that must be filtered.
             ->addJs(VENDOR_PATH . '/jquery/jquery.js')
             ->addJs(VENDOR_PATH . '/twitter/bootstrap/dist/js/bootstrap.js')
+            ->addJs(VENDOR_PATH . '/carhartl/jquery-cookie/jquery.cookie.js')
             ->addJs(PUBLIC_PATH . '/js/custom.js')
             ->join(true)
         ;

@@ -59,6 +59,7 @@ class Module implements ModuleDefinitionInterface
         $di = $application->getDI();
         $eventsManager = $application->getEventsManager();
         // Your code here.
+        // TODO: What about placing layout options here?
     }
 
     public function registerServices($di)

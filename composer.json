@@ -11,12 +11,28 @@
         "component-dir": "vendor"
     },
 
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "carhartl/jquery-cookie",
+                "version": "dev-master",
+                "source": {
+                    "url": "https://github.com/carhartl/jquery-cookie.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        }
+    ],
+
     "require": {
         "php": ">=5.4",
         "phalcon/devtools": "dev-master",
         "twitter/bootstrap": "3.*",
         "components/jquery": "2.*",
-        "leafo/lessphp": "*"
+        "leafo/lessphp": "*",
+        "carhartl/jquery-cookie": "dev-master"
     },
 
     "autoload": {

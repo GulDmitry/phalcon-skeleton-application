@@ -36,6 +36,7 @@ class RegisterViewListener
             '.phtml' => 'Phalcon\Mvc\View\Engine\Volt',
         ));
 
+        // TODO: to module layout!
         Tag::setDoctype($config->application->doctype);
         Tag::setTitle($config->application->title);
     }

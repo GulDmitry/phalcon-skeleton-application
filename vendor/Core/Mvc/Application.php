@@ -29,8 +29,6 @@ class Application extends MvcApplication
         'Core\Bootstrap\RegisterAssetsListener',
         'Core\Bootstrap\RegisterUrlListener',
         'Core\Bootstrap\RegisterViewListener',
-        // TODO: enable when ready.
-//        'Core\Bootstrap\RegisterTranslationListener',
 
         // bootstrap:beforeMergeConfig
 
@@ -40,9 +38,9 @@ class Application extends MvcApplication
 
         // bootstrap:afterMergeConfig
         'Core\Bootstrap\RegisterDIListener',
-        'Core\Bootstrap\ConfigCacheListener',
         'Core\Bootstrap\RegisterRoutesListener',
         'Core\Bootstrap\RegisterViewStrategyListener',
+        'Core\Bootstrap\RegisterTranslationListener',
 
         // bootstrap:bootstrapModules
         'Core\Bootstrap\BootstrapModulesListener',
