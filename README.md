@@ -16,8 +16,8 @@ Go to `config/autoload/` and copy `application.local.php.dist` with new name wit
 TODO
 ----
 
-* Add a new module. Load layout from Application.
-* Tests.
-* Cache for routes.
-* CLI task to flush all caches, assets, etc.
-* Cache interface according to config.
+* Add a new module. Load layout from Application. -[x]
+* Tests. -[]
+* CLI task to flush all caches, assets, etc. -[]
+* CLI task to display all modules and routes. -[]
+* Cache interface according to config. -[]

@@ -6,4 +6,5 @@ return [
     'LBL_CONTACT_PAGE' => 'Contact',
     'LBL_LANGUAGES' => 'Languages',
     'TPL_GREETING_TEXT' => 'Hello %userName%. This is an example of template with dynamic lables.',
+    'LBL_STUB' => 'Just a stub',
 ];

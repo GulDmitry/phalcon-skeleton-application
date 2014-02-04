@@ -6,4 +6,5 @@ return [
     'LBL_CONTACT_PAGE' => 'Контакты',
     'LBL_LANGUAGES' => 'Языки',
     'TPL_GREETING_TEXT' => 'Привет %userName%. Это пример шаблона с переменными.',
+    'LBL_STUB' => 'Страница заглушка',
 ];

@@ -3,7 +3,8 @@
 namespace Application;
 
 use Phalcon\Mvc\ModuleDefinitionInterface,
-    Phalcon\Loader;
+    Phalcon\Loader,
+    Phalcon\Tag;
 
 class Module implements ModuleDefinitionInterface
 {
@@ -47,7 +48,7 @@ class Module implements ModuleDefinitionInterface
             'viewStrategy' => [
                 'application' => [ // module name in lowercase
                     'viewDir' => __DIR__ . '/view/templates/',
-                    'layoutsDir' => '../layouts/',
+                    'layoutsDir' => '../layouts/', //
                     'defaultLayout' => 'layout',
                 ],
             ],
@@ -58,8 +59,11 @@ class Module implements ModuleDefinitionInterface
     {
         $di = $application->getDI();
         $eventsManager = $application->getEventsManager();
-        // Your code here.
-        // TODO: What about placing layout options here?
+        $config = $di->get('config');
+
+        // Set up layout options.
+        Tag::setDoctype($config->application->doctype);
+        Tag::setTitle($config->application->title);
     }
 
     public function registerServices($di)

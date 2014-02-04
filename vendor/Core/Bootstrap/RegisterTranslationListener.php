@@ -20,7 +20,7 @@ class RegisterTranslationListener
 
         $defaultTranslations = require DATA_PATH . '/language/' . $config->defaultLanguage . '.php';
 
-        // TODO: Cache interface for this part
+        // TODO: Cache interface for this part. Maybe inherit listeners from class where put cache handler.
         if ($config->languageCache->enabled) {
             $storage = $config->languageCache->storage;
             $lifetime = $config->languageCache->lifetime;

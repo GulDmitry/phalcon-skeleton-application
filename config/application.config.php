@@ -7,6 +7,7 @@ return [
     ],
     'modules' => [
         'Application',
+        'Admin',
     ],
     'configGlobPaths' => [
         'config/autoload/{,*.}{global,local}.php',
@@ -16,7 +17,7 @@ return [
         'compiledSeparator' => '_',
         'compileAlways' => false,
     ],
-    'viewStrategyClass' => 'Core\Mvc\DefaultViewStrategy',
+    'viewStrategyClass' => '\Core\Mvc\DefaultViewStrategy',
     'application' => [
         'libraryDir' => APPLICATION_PATH . '/library/',
     ],

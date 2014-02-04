@@ -3,8 +3,7 @@
 namespace Core\Bootstrap;
 
 use Phalcon\Mvc\View,
-    Phalcon\Mvc\View\Engine\Volt,
-    Phalcon\Tag;
+    Phalcon\Mvc\View\Engine\Volt;
 
 class RegisterViewListener
 {
@@ -33,11 +32,7 @@ class RegisterViewListener
                     $volt->setOptions((array)$config->templateOptions);
                     return $volt;
                 },
-            '.phtml' => 'Phalcon\Mvc\View\Engine\Volt',
+            '.phtml' => '\Phalcon\Mvc\View\Engine\Volt',
         ));
-
-        // TODO: to module layout!
-        Tag::setDoctype($config->application->doctype);
-        Tag::setTitle($config->application->title);
     }
 }

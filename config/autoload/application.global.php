@@ -4,7 +4,7 @@ return [
     'application' => [
         'defaultModule' => 'Application',
         'title' => 'Phalcon Application',
-        'doctype' => Phalcon\Tag::HTML5,
+        'doctype' => \Phalcon\Tag::HTML5,
     ],
     'assetsCache' => [
         'enabled' => true,
@@ -17,10 +17,10 @@ return [
         'enabled' => true,
         'lifetime' => 86400,
         'storage' => [
-            'backend' => 'Phalcon\Cache\Backend\File',
-            'frontend' => 'Phalcon\Cache\Frontend\Data',
+            'backend' => '\Phalcon\Cache\Backend\File',
+            'frontend' => '\Phalcon\Cache\Frontend\Data',
             'options' => [
-                'key' => 'language.cache',
+                'key' => 'language',
                 'cacheDir' => './data/cache/language/',
             ],
         ],

@@ -13,6 +13,6 @@ class IndexController extends Controller
 
     public function notFoundAction()
     {
-
+        $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
     }
 }

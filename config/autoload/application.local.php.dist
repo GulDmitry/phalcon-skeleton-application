@@ -21,7 +21,7 @@ return [
     ],
     'application' => [
         'debug' => true,
-        'baseUri' => 'http://phalcon/',
+        'baseUri' => '//phalcon/',
     ],
     'languageCache' => [
         'enabled' => false,
