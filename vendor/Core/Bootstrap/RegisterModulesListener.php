@@ -10,14 +10,18 @@ class RegisterModulesListener
     {
         $di = $application->getDI();
         $config = $di->get('config');
-
         $modulesConfig = [];
-        if (isset($config['modules'])) {
-            foreach ($config['modules'] as $moduleNamespace) {
-                $modulesConfig[$moduleNamespace] = [
-                    'className' => $moduleNamespace . '\Module',
-                ];
-            }
+
+        if (PHP_SAPI === 'cli') {
+            $availableModules = $config->modulesCLI;
+        } else {
+            $availableModules = $config->modules;
+        }
+
+        foreach ($availableModules as $moduleNamespace) {
+            $modulesConfig[$moduleNamespace] = [
+                'className' => $moduleNamespace . '\Module',
+            ];
         }
         if (empty($modulesConfig)) {
             throw new DomainException(

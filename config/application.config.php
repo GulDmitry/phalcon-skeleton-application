@@ -9,6 +9,9 @@ return [
         'Application',
         'Admin',
     ],
+    'modulesCLI' => [
+        'CLI',
+    ],
     'configGlobPaths' => [
         'config/autoload/{,*.}{global,local}.php',
     ],
