@@ -7,11 +7,11 @@ use Phalcon\CLI\Router,
 
 class RegisterCLIRoutesListener
 {
-//    public function init($event, $application)
-//    {
-//        $di = $application->getDI();
-//        $di->setShared('router', new Router());
-//    }
+    public function init($event, $application)
+    {
+        $di = $application->getDI();
+        $di->setShared('router', new Router());
+    }
 
     public function afterMergeConfig($event, $application)
     {
@@ -36,6 +36,12 @@ class RegisterCLIRoutesListener
                 if (!isset($routeOptions->defaults->action)) {
                     throw new DomainException(sprintf(
                         "Missing default option 'action' for the route '%s'",
+                        $routeName
+                    ));
+                }
+                if (!isset($routeOptions->defaults->action)) {
+                    throw new DomainException(sprintf(
+                        "Missing 'description' for the route '%s'",
                         $routeName
                     ));
                 }

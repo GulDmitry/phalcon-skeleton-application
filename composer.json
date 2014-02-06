@@ -32,7 +32,8 @@
         "twitter/bootstrap": "3.*",
         "components/jquery": "2.*",
         "leafo/lessphp": "*",
-        "carhartl/jquery-cookie": "dev-master"
+        "carhartl/jquery-cookie": "dev-master",
+        "symfony/Console": "*"
     },
 
     "autoload": {

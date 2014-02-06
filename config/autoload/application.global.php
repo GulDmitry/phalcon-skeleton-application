@@ -24,7 +24,7 @@ return [
                 'frontend' => '\Phalcon\Cache\Frontend\Data',
                 'options' => [
                     'key' => 'language',
-                    'cacheDir' => './data/cache/language/',
+                    'cacheDir' => APPLICATION_PATH . '/data/cache/language/',
                 ],
             ],
         ],

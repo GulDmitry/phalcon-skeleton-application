@@ -16,7 +16,7 @@ return [
         'config/autoload/{,*.}{global,local}.php',
     ],
     'templateOptions' => [
-        'compiledPath' => './data/cache/template/',
+        'compiledPath' => APPLICATION_PATH . '/data/cache/template/',
         'compiledSeparator' => '_',
         'compileAlways' => false,
     ],

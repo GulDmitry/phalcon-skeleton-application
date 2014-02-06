@@ -105,7 +105,9 @@ class Application extends ConsoleApplication
         $routeData = $config->router->routes[$arguments['route']]->defaults;
         $arguments['task'] = $routeData->namespace . '\\' . ucfirst($routeData->task);
         $arguments['action'] = $routeData->action;
-        $arguments['description'] = isset($routeData->description) ? $routeData->description : '';
+        if (isset($routeData->description)) {
+            $arguments['description'] = $routeData->description;
+        }
 
         return $arguments;
     }

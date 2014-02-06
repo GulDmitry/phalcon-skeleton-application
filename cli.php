@@ -1,8 +1,8 @@
 <?php
-defined('APPLICATION_PATH') || define('APPLICATION_PATH', realpath(__DIR__ . '/..'));
-defined('DATA_PATH') || define('DATA_PATH', realpath(__DIR__ . '/../data'));
-defined('VENDOR_PATH') || define('VENDOR_PATH', realpath(__DIR__ . '/../vendor'));
-defined('PUBLIC_PATH') || define('PUBLIC_PATH', __DIR__);
+defined('APPLICATION_PATH') || define('APPLICATION_PATH', realpath(__DIR__));
+defined('DATA_PATH') || define('DATA_PATH', realpath(__DIR__ . '/data'));
+defined('VENDOR_PATH') || define('VENDOR_PATH', realpath(__DIR__ . '/vendor'));
+defined('PUBLIC_PATH') || define('PUBLIC_PATH', __DIR__ . '/public');
 
 if (!extension_loaded('phalcon')) {
     exit('Phalcon extension is not installed. See http://phalconphp.com/en/download');

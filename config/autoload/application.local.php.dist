@@ -23,8 +23,10 @@ return [
         'debug' => true,
         'baseUri' => '//phalcon/',
     ],
-    'languageCache' => [
-        'enabled' => false,
+    'multilanguage' => [
+        'languageCache' => [
+            'enabled' => false,
+        ],
     ],
     'templateOptions' => [
         'compileAlways' => true,

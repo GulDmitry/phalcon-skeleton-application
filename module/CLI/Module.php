@@ -3,7 +3,8 @@
 namespace CLI;
 
 use Phalcon\Mvc\ModuleDefinitionInterface,
-    Phalcon\Loader;
+    Phalcon\Loader,
+    Symfony\Component\Console\Application as ConsoleApp;
 
 class Module implements ModuleDefinitionInterface
 {
@@ -38,11 +39,28 @@ class Module implements ModuleDefinitionInterface
                             'description' => 'Displays all available routes',
                         ],
                     ],
-                    'test' => [
+                    'parameterized-task' => [
                         'defaults' => [
                             'namespace' => 'CLI\Task',
                             'task' => 'main',
                             'action' => 'test',
+                            'description' => 'Test options',
+                        ],
+                    ],
+                    'clear-all' => [
+                        'defaults' => [
+                            'namespace' => 'CLI\Task',
+                            'task' => 'cache',
+                            'action' => 'clearAll',
+                            'description' => 'Clears all cached stuff including assets',
+                        ],
+                    ],
+                    'get-routes' => [
+                        'defaults' => [
+                            'namespace' => 'CLI\Task',
+                            'task' => 'route',
+                            'action' => 'availableMvcRoutes',
+                            'description' => 'Shows available modules with routes',
                         ],
                     ],
                 ],
@@ -52,7 +70,8 @@ class Module implements ModuleDefinitionInterface
 
     public function onBootstrap($application)
     {
-
+        $di = $application->getDI();
+        $di->set('console', new ConsoleApp());
     }
 
     public function registerServices($di)
