@@ -60,7 +60,7 @@ class Module implements ModuleDefinitionInterface
                             'namespace' => 'CLI\Task',
                             'task' => 'route',
                             'action' => 'availableMvcRoutes',
-                            'description' => 'Shows available modules with routes',
+                            'description' => 'Displays available modules with routes',
                         ],
                     ],
                 ],

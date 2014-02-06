@@ -1,8 +1,18 @@
-
+Phalcon Skeleton Applicaton
 ============================
 
 Introduction
 ------------
+Based on https://github.com/dphn/SkeletonApplication
+
+The new features:
+
+* Multi language.
+* Examples of cache usage.
+* CLI module with ability to clear cache and show system routes.
+* Layouts hierarchy and partials.
+* Assets compilation.
+* Twitter Bootstrap as main theme.
 
 Setup
 ------
@@ -11,12 +21,18 @@ Setup
 
 `php composer.php install`
 
-Go to `config/autoload/` and copy `application.local.php.dist` with new name without `.dist`.
+Go to `config/autoload/` copy `application.local.php.dist` and rename without `.dist`.
+
+CLI
+---
+
+CLI modules have the same structure as MVC modules with one difference - tasks instead of controllers. To create a new -
+put a folder in `data/modules/` and define a name in the configs `modulesCLI` section.
+
+To use go to the root of your project and run `php cli.php`. You will see all available routes.
 
 TODO
 ----
 
 * Tests.
-* CLI task to flush all caches, assets, etc.
-* CLI task to display all modules and routes.
-* Cache interface according to config.
+* Cache interface that uses config.
