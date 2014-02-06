@@ -9,21 +9,24 @@ return [
     'assetsCache' => [
         'enabled' => true,
     ],
-    'languages' => [
-        'en' => 'English',
-        'ru' => 'Русский',
-    ],
-    'languageCache' => [
+    'multilanguage' => [
         'enabled' => true,
-        'lifetime' => 86400,
-        'storage' => [
-            'backend' => '\Phalcon\Cache\Backend\File',
-            'frontend' => '\Phalcon\Cache\Frontend\Data',
-            'options' => [
-                'key' => 'language',
-                'cacheDir' => './data/cache/language/',
+        'languages' => [
+            'en' => 'English',
+            'ru' => 'Русский',
+        ],
+        'defaultLanguage' => 'en',
+        'languageCache' => [
+            'enabled' => true,
+            'lifetime' => 86400,
+            'storage' => [
+                'backend' => '\Phalcon\Cache\Backend\File',
+                'frontend' => '\Phalcon\Cache\Frontend\Data',
+                'options' => [
+                    'key' => 'language',
+                    'cacheDir' => './data/cache/language/',
+                ],
             ],
         ],
     ],
-    'defaultLanguage' => 'en',
 ];

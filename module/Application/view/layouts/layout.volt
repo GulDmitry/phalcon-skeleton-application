@@ -20,16 +20,18 @@
                 <li><a href="#contact">{{ t._("LBL_CONTACT_PAGE") }}</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        {{ t._("LBL_LANGUAGES") }} <b class="caret"></b>
-                    </a>
-                    <ul id="languages" class="dropdown-menu">
-                        {%- for key, lang in config.languages %}
-                            <li><a data-key="{{ key }}" href="#">{{ lang }}</a></li>
-                        {%- endfor %}
-                    </ul>
-                </li>
+                {% if config.multilanguage.enabled %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            {{ t._("LBL_LANGUAGES") }} <b class="caret"></b>
+                        </a>
+                        <ul id="languages" class="dropdown-menu">
+                            {%- for key, lang in config.multilanguage.languages %}
+                                <li><a data-key="{{ key }}" href="#">{{ lang }}</a></li>
+                            {%- endfor %}
+                        </ul>
+                    </li>
+                {% endif %}
             </ul>
         </div>
         <!-- /.nav-collapse -->
