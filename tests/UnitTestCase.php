@@ -2,7 +2,9 @@
 namespace Test;
 
 use \Phalcon\DI,
-    \Phalcon\Test\UnitTestCase as PhalconTestCase;
+    \Phalcon\Test\UnitTestCase as PhalconTestCase,
+    \Core\Mvc\Application as MvcApplication;
+
 
 abstract class UnitTestCase extends PhalconTestCase
 {
@@ -21,6 +23,16 @@ abstract class UnitTestCase extends PhalconTestCase
         parent::setUp($di);
 
         $this->loaded = true;
+    }
+
+    /**
+     * Setup Mvc Application.
+     *
+     * @return \Core\Mvc\Application
+     */
+    public function initMvcApplication()
+    {
+        return MvcApplication::init(require APPLICATION_PATH . '/config/application.config.php');
     }
 
     /**

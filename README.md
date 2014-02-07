@@ -13,6 +13,7 @@ The new features:
 * Layouts hierarchy and partials.
 * Assets compilation.
 * Twitter Bootstrap as main theme.
+* Tests.
 
 Setup
 ------
@@ -30,6 +31,12 @@ CLI modules have the same structure as MVC modules with one difference - tasks i
 put a folder in `data/modules/` and define a name in the configs `modulesCLI` section.
 
 To use go to the root of your project and run `php cli.php`. You will see all available routes.
+
+Tests
+-----
+
+Install `phpunit`.
+Go to `tests/` and execute the command `phpunit`.
 
 TODO
 ----

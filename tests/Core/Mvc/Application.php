@@ -72,6 +72,12 @@ class Application extends MvcApplication
      */
     public static function init($configuration = [])
     {
+        static $application;
+
+        if ($application instanceof Application) {
+            return $application;
+        }
+
         $config = new Config($configuration);
         $di = new DiFactory();
         $di->setShared('config', $config);
@@ -116,6 +122,7 @@ class Application extends MvcApplication
     public function handle($url = '')
     {
         try {
+            $di = $this->getDI();
             $eventsManager = $this->getEventsManager();
             $eventsManager->fire('bootstrap:init', $this);
             $eventsManager->fire('bootstrap:beforeMergeConfig', $this);
