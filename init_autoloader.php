@@ -7,11 +7,13 @@ if (file_exists('vendor/autoload.php')) {
     // "In Phalcon 2.0 we'll adapt the current autoloader to PSR-4 as long it is approved."
     $loader->registerNamespaces(
         [
-            'Core\\' => 'vendor/Core/',
+            'Core' => 'vendor/Core/',
             'Core\Bootstrap' => 'vendor/Core/Bootstrap/',
             'Core\Mvc' => 'vendor/Core/Mvc/',
             'Core\Exception' => 'vendor/Core/Exception/',
             'Core\CLI' => 'vendor/Core/CLI/',
+            'Test' => 'tests/',
+            'Phalcon' => 'library/Phalcon/',
         ]
     );
     $loader->register();

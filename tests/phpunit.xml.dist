@@ -1,0 +1,20 @@
+<phpunit bootstrap="./TestHelper.php"
+         backupGlobals="false"
+         verbose="true"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         stopOnFailure="false"
+         syntaxCheck="true"
+         testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader">
+    <testsuite name="Phalcon Test Suite">
+        <directory>./</directory>
+    </testsuite>
+    <!--For code coverage.-->
+    <filter>
+        <blacklist>
+            <file>../data/cache</file>
+        </blacklist>
+    </filter>
+</phpunit>

@@ -1,5 +1,5 @@
 {
-    "name": "MusDiff",
+    "name": "Phalcon Skeleton Applicaton",
     "description": "Phalcon application",
     "license": "BSD-3-Clause",
     "keywords": [
@@ -33,12 +33,15 @@
         "components/jquery": "2.*",
         "leafo/lessphp": "*",
         "carhartl/jquery-cookie": "dev-master",
-        "symfony/Console": "*"
+        "symfony/Console": "*",
+        "phpunit/phpunit": "3.*"
     },
 
     "autoload": {
         "psr-4": {
-            "Core\\": "vendor/Core/"
+            "Core\\": "vendor/Core/",
+            "Test\\": "tests/",
+            "Phalcon\\": "library/Phalcon/"
         }
     }
 }
