@@ -15,8 +15,12 @@ class LoadModulesListener
             $reflection = new ReflectionClass($class);
             $moduleOptions['path'] = $reflection->getFileName();
 
-            $module = new $class();
-            $moduleOptions['object'] = $module;
+            if (isset($moduleOptions['object'])) {
+                $module = $moduleOptions['object'];
+            } else {
+                $module = new $class();
+                $moduleOptions['object'] = $module;
+            }
             if (method_exists($module, 'registerAutoloaders')) {
                 $module->registerAutoloaders();
             }

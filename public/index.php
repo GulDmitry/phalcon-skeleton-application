@@ -5,6 +5,8 @@ defined('DATA_PATH') || define('DATA_PATH', realpath(__DIR__ . '/../data'));
 defined('VENDOR_PATH') || define('VENDOR_PATH', realpath(__DIR__ . '/../vendor'));
 defined('PUBLIC_PATH') || define('PUBLIC_PATH', __DIR__);
 
+defined('ENTRY_POINT') || define('ENTRY_POINT', 'web');
+
 if (!extension_loaded('phalcon')) {
     exit('Phalcon extension is not installed. See http://phalconphp.com/en/download');
 }
@@ -20,6 +22,8 @@ if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['RE
 }
 
 use Core\Mvc\Application;
+use Phalcon\Debug;
+use Phalcon\Http\Response;
 
 $localConfig = include './config/autoload/application.local.php';
 // To follow bootstrapping errors. On handle replaced with config value.
@@ -28,4 +32,11 @@ if (isset($localConfig, $localConfig['application']['debug'])) {
 }
 
 $application = Application::init(require './config/application.config.php');
-echo $application->handle()->getContent();
+try {
+    echo $application->handle()->getContent();
+} catch (Exception $e) {
+    if ($application->isDebugMode()) {
+        (new Debug())->onUncaughtException($e);
+    }
+    return new Response();
+}

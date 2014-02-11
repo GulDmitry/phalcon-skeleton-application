@@ -3,9 +3,9 @@
 namespace Test\Core\Bootstrap;
 
 use Test\UnitTestCase;
-use Core\Bootstrap\BootstrapModulesListener as CoreBootstrapModules;
+use Core\Bootstrap\LoadModulesListener as CoreLoadModulesListener;
 
-class BootstrapModulesListener extends UnitTestCase
+class LoadModulesListener extends UnitTestCase
 {
     /**
      * @var \Core\Mvc\Application
@@ -17,7 +17,7 @@ class BootstrapModulesListener extends UnitTestCase
         $this->app = $this->initMvcApplication();
         $eventsManager = $this->app->getEventsManager();
         $eventsManager->detachAll('bootstrap');
-        $eventsManager->attach('bootstrap', new CoreBootstrapModules());
+        $eventsManager->attach('bootstrap', new CoreLoadModulesListener());
 
         parent::setUp();
     }
@@ -27,13 +27,13 @@ class BootstrapModulesListener extends UnitTestCase
         parent::tearDown();
     }
 
-    public function testBootstrapModules()
+    public function testModulesAutoloadingModules()
     {
-        $applicationModuleMock = $this->getMock('Application\Module', array('onBootstrap'));
-        $applicationModuleMock->expects($this->once())->method('onBootstrap');
+        $applicationModuleMock = $this->getMock('Application\Module', array('registerAutoloaders'));
+        $applicationModuleMock->expects($this->once())->method('registerAutoloaders');
 
-        $adminModuleMock = $this->getMock('Admin\Module', array('onBootstrap'));
-        $adminModuleMock->expects($this->once())->method('onBootstrap');
+        $adminModuleMock = $this->getMock('Admin\Module', array('registerAutoloaders'));
+        $adminModuleMock->expects($this->once())->method('registerAutoloaders');
 
         $modulesConfig = [
             'Application' => [

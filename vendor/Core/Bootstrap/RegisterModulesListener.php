@@ -12,7 +12,7 @@ class RegisterModulesListener
         $config = $di->get('config');
         $modulesConfig = [];
 
-        if (PHP_SAPI === 'cli') {
+        if (ENTRY_POINT === 'cli') {
             $availableModules = $config->modulesCLI;
         } else {
             $availableModules = $config->modules;

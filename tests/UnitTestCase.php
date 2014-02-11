@@ -1,9 +1,13 @@
 <?php
 namespace Test;
 
-use \Phalcon\DI,
-    \Phalcon\Test\UnitTestCase as PhalconTestCase,
-    \Core\Mvc\Application as MvcApplication;
+use \Phalcon\DI;
+use \Phalcon\Test\UnitTestCase as PhalconTestCase;
+use \Core\Mvc\Application as MvcApplication;
+use \Core\Bootstrap\RegisterViewListener;
+use \Core\Bootstrap\RegisterModulesListener;
+use \Core\Bootstrap\LoadModulesListener;
+use \Core\Bootstrap\RegisterModulesPathsListener;
 
 
 abstract class UnitTestCase extends PhalconTestCase
@@ -32,7 +36,26 @@ abstract class UnitTestCase extends PhalconTestCase
      */
     public function initMvcApplication()
     {
-        return MvcApplication::init(require APPLICATION_PATH . '/config/application.config.php');
+        $app = MvcApplication::init(require APPLICATION_PATH . '/config/application.config.php');
+        $viewListener = new RegisterViewListener();
+        $pathListener = new RegisterModulesPathsListener();
+        // Register module dirs.
+        $pathListener->init(null, $app);
+        // To avoid Phalcon\DI\Exception : Service 'view' wasn't found in the dependency injection container
+        $viewListener->init(null, $app);
+
+        $router = $app->getDI()->getShared('router');
+
+        // Need at least one default route.
+        $router->add('/', [
+                'module' => 'Application',
+                'namespace' => 'Application\Controller',
+                'controller' => 'index',
+                'action' => 'index',
+            ])
+            ->setName('default_route_for_test');
+
+        return $app;
     }
 
     /**

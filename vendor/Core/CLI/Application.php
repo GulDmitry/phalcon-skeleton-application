@@ -18,7 +18,6 @@ class Application extends ConsoleApplication
         'Core\Bootstrap\RegisterModulesPathsListener',
         'Core\Bootstrap\RegisterModulesListener',
         'Core\Bootstrap\LoadModulesListener',
-
         // bootstrap:beforeMergeConfig
 
         // bootstrap:mergeConfig
@@ -118,21 +117,16 @@ class Application extends ConsoleApplication
      */
     public function handle(array $arguments)
     {
-        try {
-            $eventsManager = $this->getEventsManager();
-            $eventsManager->fire('bootstrap:init', $this);
-            $eventsManager->fire('bootstrap:beforeMergeConfig', $this);
-            $eventsManager->fire('bootstrap:mergeConfig', $this);
-            $eventsManager->fire('bootstrap:afterMergeConfig', $this);
-            $eventsManager->fire('bootstrap:bootstrapModules', $this);
-            $eventsManager->fire('bootstrap:beforeHandle', $this);
+        $eventsManager = $this->getEventsManager();
+        $eventsManager->fire('bootstrap:init', $this);
+        $eventsManager->fire('bootstrap:beforeMergeConfig', $this);
+        $eventsManager->fire('bootstrap:mergeConfig', $this);
+        $eventsManager->fire('bootstrap:afterMergeConfig', $this);
+        $eventsManager->fire('bootstrap:bootstrapModules', $this);
+        $eventsManager->fire('bootstrap:beforeHandle', $this);
 
-            $arguments = $this->convertArgsToCLIFormat($arguments);
+        $arguments = $this->convertArgsToCLIFormat($arguments);
 
-            return parent::handle($arguments);
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            exit(255);
-        }
+        return parent::handle($arguments);
     }
 }

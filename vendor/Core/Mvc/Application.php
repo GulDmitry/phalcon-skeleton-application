@@ -2,14 +2,12 @@
 
 namespace Core\Mvc;
 
+use Phalcon\Exception;
 use Phalcon\Mvc\Application as MvcApplication,
     Phalcon\Mvc\Dispatcher,
     Phalcon\DI\FactoryDefault as DiFactory,
-    Phalcon\Http\Response,
     Phalcon\Config,
-    Phalcon\Debug,
-    Core\Exception\ExecutionException,
-    Exception;
+    Core\Exception\ExecutionException;
 
 class Application extends MvcApplication
 {
@@ -29,19 +27,16 @@ class Application extends MvcApplication
         'Core\Bootstrap\RegisterAssetsListener',
         'Core\Bootstrap\RegisterUrlListener',
         'Core\Bootstrap\RegisterViewListener',
-
         // bootstrap:beforeMergeConfig
 
         // bootstrap:mergeConfig
         'Core\Bootstrap\MergeGlobConfigListener',
         'Core\Bootstrap\MergeModulesConfigListener',
-
         // bootstrap:afterMergeConfig
         'Core\Bootstrap\RegisterDIListener',
         'Core\Bootstrap\RegisterRoutesListener',
         'Core\Bootstrap\RegisterViewStrategyListener',
         'Core\Bootstrap\RegisterTranslationListener',
-
         // bootstrap:bootstrapModules
         'Core\Bootstrap\BootstrapModulesListener',
     ];
@@ -55,7 +50,7 @@ class Application extends MvcApplication
         $reportingLevel = $flag ? E_ALL | E_STRICT : 0;
         error_reporting($reportingLevel);
 
-        static::$debugMode = (bool) $flag;
+        static::$debugMode = (bool)$flag;
     }
 
     /**
@@ -113,23 +108,16 @@ class Application extends MvcApplication
      * @param string $url optional
      * @return Phalcon\Http\ResponseInterface
      */
-    public function handle($url = '')
+    public function handle($url = '/')
     {
-        try {
-            $eventsManager = $this->getEventsManager();
-            $eventsManager->fire('bootstrap:init', $this);
-            $eventsManager->fire('bootstrap:beforeMergeConfig', $this);
-            $eventsManager->fire('bootstrap:mergeConfig', $this);
-            $eventsManager->fire('bootstrap:afterMergeConfig', $this);
-            $eventsManager->fire('bootstrap:bootstrapModules', $this);
-            $eventsManager->fire('bootstrap:beforeHandle', $this);
+        $eventsManager = $this->getEventsManager();
+        $eventsManager->fire('bootstrap:init', $this);
+        $eventsManager->fire('bootstrap:beforeMergeConfig', $this);
+        $eventsManager->fire('bootstrap:mergeConfig', $this);
+        $eventsManager->fire('bootstrap:afterMergeConfig', $this);
+        $eventsManager->fire('bootstrap:bootstrapModules', $this);
+        $eventsManager->fire('bootstrap:beforeHandle', $this);
 
-            return parent::handle($url);
-        } catch (Exception $e) {
-            if ($this->isDebugMode()) {
-                (new Debug())->onUncaughtException($e);
-            }
-            return new Response();
-        }
+        return parent::handle($url);
     }
 }

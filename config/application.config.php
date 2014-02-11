@@ -12,6 +12,10 @@ return [
     'modulesCLI' => [
         'CLI',
     ],
+    'application' => [
+        'defaultModule' => 'Application',
+        'libraryDir' => APPLICATION_PATH . '/library/',
+    ],
     'configGlobPaths' => [
         'config/autoload/{,*.}{global,local}.php',
     ],
@@ -21,7 +25,4 @@ return [
         'compileAlways' => false,
     ],
     'viewStrategyClass' => '\Core\Mvc\DefaultViewStrategy',
-    'application' => [
-        'libraryDir' => APPLICATION_PATH . '/library/',
-    ],
 ];

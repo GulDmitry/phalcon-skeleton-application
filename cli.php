@@ -4,6 +4,8 @@ defined('DATA_PATH') || define('DATA_PATH', realpath(__DIR__ . '/data'));
 defined('VENDOR_PATH') || define('VENDOR_PATH', realpath(__DIR__ . '/vendor'));
 defined('PUBLIC_PATH') || define('PUBLIC_PATH', __DIR__ . '/public');
 
+defined('ENTRY_POINT') || define('ENTRY_POINT', 'cli');
+
 if (!extension_loaded('phalcon')) {
     exit('Phalcon extension is not installed. See http://phalconphp.com/en/download');
 }
@@ -30,4 +32,10 @@ if (count($params) > 0) {
 use Core\CLI\Application;
 
 $application = Application::init(require './config/application.config.php');
-$application->handle($arguments);
+
+try {
+    $application->handle($arguments);
+} catch (Exception $e) {
+    echo $e->getMessage();
+    exit(255);
+}
