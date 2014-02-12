@@ -7,14 +7,9 @@ use Core\Bootstrap\BootstrapModulesListener as CoreBootstrapModules;
 
 class BootstrapModulesListener extends UnitTestCase
 {
-    /**
-     * @var \Core\Mvc\Application
-     */
-    public $app;
-
     protected function setUp()
     {
-        $this->app = $this->initMvcApplication();
+        $this->initMvcApplication();
         $eventsManager = $this->app->getEventsManager();
         $eventsManager->detachAll('bootstrap');
         $eventsManager->attach('bootstrap', new CoreBootstrapModules());

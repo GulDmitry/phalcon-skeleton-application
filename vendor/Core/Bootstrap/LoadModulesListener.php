@@ -22,7 +22,7 @@ class LoadModulesListener
                 $moduleOptions['object'] = $module;
             }
             if (method_exists($module, 'registerAutoloaders')) {
-                $module->registerAutoloaders();
+                $module->registerAutoloaders($application->getDI());
             }
         }
         $application->registerModules($modules, true);

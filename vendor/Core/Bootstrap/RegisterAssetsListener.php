@@ -26,9 +26,9 @@ class RegisterAssetsListener
 
     /**
      * @param \Phalcon\Mvc\Application $application
-     * @param Manager $manager
+     * @param \Phalcon\Assets\Manager $manager
      */
-    public function setupJS(\Phalcon\Mvc\Application $application, \Phalcon\Assets\Manager $manager)
+    public function setupJS($application, $manager)
     {
         $di = $application->getDI();
         $config = $di->get('config');
@@ -63,9 +63,10 @@ class RegisterAssetsListener
 
     /**
      * @param \Phalcon\Mvc\Application $application
-     * @param Manager $manager
+     * @param \Phalcon\Assets\Manager $manager
+     * @param Bool $isLess
      */
-    public function setupCss(\Phalcon\Mvc\Application $application, \Phalcon\Assets\Manager $manager, $isLess = false)
+    public function setupCss($application, $manager, $isLess = false)
     {
         $di = $application->getDI();
         $config = $di->get('config');

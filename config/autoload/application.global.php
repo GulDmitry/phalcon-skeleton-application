@@ -15,6 +15,7 @@ return [
             'ru' => 'Русский',
         ],
         'defaultLanguage' => 'en',
+        'path' => DATA_PATH . '/language/',
         'languageCache' => [
             'enabled' => true,
             'lifetime' => 86400,
@@ -23,7 +24,7 @@ return [
                 'frontend' => '\Phalcon\Cache\Frontend\Data',
                 'options' => [
                     'key' => 'language',
-                    'cacheDir' => APPLICATION_PATH . '/data/cache/language/',
+                    'cacheDir' => DATA_PATH . '/cache/language/',
                 ],
             ],
         ],

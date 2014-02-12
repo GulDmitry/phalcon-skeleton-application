@@ -2,11 +2,11 @@
 
 namespace Core\CLI;
 
-use Phalcon\CLI\Console as ConsoleApplication,
-    Phalcon\DI\FactoryDefault\CLI as DiFactory,
-    Phalcon\Config,
-    Phalcon\Exception,
-    Core\Exception\DomainException;
+use Phalcon\CLI\Console as ConsoleApplication;
+use Phalcon\DI\FactoryDefault\CLI as DiFactory;
+use Phalcon\Config;
+use Phalcon\Loader;
+use Core\Exception\DomainException;
 
 class Application extends ConsoleApplication
 {
@@ -51,6 +51,10 @@ class Application extends ConsoleApplication
 
         $eventsManager = $di->getShared('eventsManager');
         $application->setEventsManager($eventsManager);
+
+        $loader = new Loader();
+        $loader->register();
+        $di->setShared('loader', $loader);
 
         return $application->bootstrap();
     }

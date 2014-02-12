@@ -20,7 +20,7 @@ return [
         'config/autoload/{,*.}{global,local}.php',
     ],
     'templateOptions' => [
-        'compiledPath' => APPLICATION_PATH . '/data/cache/template/',
+        'compiledPath' => DATA_PATH . '/cache/template/',
         'compiledSeparator' => '_',
         'compileAlways' => false,
     ],

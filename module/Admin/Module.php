@@ -7,15 +7,11 @@ use Phalcon\Mvc\ModuleDefinitionInterface,
 
 class Module implements ModuleDefinitionInterface
 {
-    public function registerAutoloaders()
+    public function registerAutoloaders($di)
     {
-        $loader = new Loader();
-        $loader->registerNamespaces(
-            [
-                'Admin' => __DIR__ . '/src',
-            ]
-        );
-        $loader->register();
+        $di->get('loader')->registerNamespaces([
+            'Admin' => __DIR__ . '/src',
+        ], true);
     }
 
     public function getConfig()

@@ -8,13 +8,11 @@ use Phalcon\Mvc\ModuleDefinitionInterface,
 
 class Module implements ModuleDefinitionInterface
 {
-    public function registerAutoloaders()
+    public function registerAutoloaders($di)
     {
-        $loader = new Loader();
-        $loader->registerNamespaces([
+        $di->get('loader')->registerNamespaces([
             'Application' => __DIR__ . '/src',
-        ]);
-        $loader->register();
+        ], true);
     }
 
     public function getConfig()

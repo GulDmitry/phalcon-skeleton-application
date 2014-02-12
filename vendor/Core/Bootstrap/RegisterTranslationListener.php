@@ -2,9 +2,9 @@
 
 namespace Core\Bootstrap;
 
-use Phalcon\Translate\Adapter\NativeArray as Adapter,
-    Phalcon\Tag,
-    Phalcon\Http\Response\Cookies;
+use Phalcon\Translate\Adapter\NativeArray as Adapter;
+use Phalcon\Cache\ConfigHelper as Helper;
+use Phalcon\Http\Response\Cookies;
 
 class RegisterTranslationListener
 {
@@ -21,27 +21,16 @@ class RegisterTranslationListener
         $cookies = new Cookies();
         // From cookies or $_SERVER['HTTP_ACCEPT_LANGUAGE'];
         $language = $cookies->get('lang')->getValue(null, substr($application->request->getBestLanguage(), 0, 2));
-        $path = DATA_PATH . '/language/' . $language . '.php';
+        $path = $config->multilanguage->path . $language . '.php';
 
-        $defaultTranslations = require DATA_PATH . '/language/' . $config->multilanguage->defaultLanguage . '.php';
+        $defaultTranslations = require $config->multilanguage->path . $config->multilanguage->defaultLanguage . '.php';
 
-        // TODO: Cache interface for this part. Maybe inherit listeners from class where put cache handler.
-        if ($config->multilanguage->languageCache->enabled) {
-            $storage = $config->multilanguage->languageCache->storage;
-            $lifetime = $config->multilanguage->languageCache->lifetime;
+        $cacheHelper = new Helper($config->multilanguage->languageCache->toArray());
 
-            $containerClass = $storage->frontend;
-            $container = new $containerClass($lifetime);
-
-            $storageClass = $storage->backend;
-            $cache = new $storageClass($container, (array)$storage->options);
-
-            $cachedLanguage = $cache->get($storage->options->key . '.' . $language, $lifetime);
-
-            if ($cachedLanguage) {
-                $this->fillDI($application, $cachedLanguage);
-                return;
-            }
+        $cachedLanguage = $cacheHelper->getValue('.' . $language);
+        if ($cachedLanguage) {
+            $this->fillDI($application, $cachedLanguage);
+            return;
         }
 
         //Check if we have a translation file for that lang.
@@ -51,11 +40,8 @@ class RegisterTranslationListener
             $translations = $defaultTranslations;
         }
 
-        if ($config->multilanguage->languageCache->enabled) {
-            $cache->save($storage->options->key . '.' . $language, $translations, $lifetime);
-        }
+        $cacheHelper->setValue('.' . $language, $translations);
 
-        // TODO: test on untranslated lable.
         // TODO: CLI task to display all untranslated lables.
         $this->fillDI($application, $translations);
     }

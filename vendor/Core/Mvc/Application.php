@@ -2,12 +2,12 @@
 
 namespace Core\Mvc;
 
-use Phalcon\Exception;
-use Phalcon\Mvc\Application as MvcApplication,
-    Phalcon\Mvc\Dispatcher,
-    Phalcon\DI\FactoryDefault as DiFactory,
-    Phalcon\Config,
-    Core\Exception\ExecutionException;
+use Phalcon\Loader;
+use Phalcon\Mvc\Application as MvcApplication;
+use Phalcon\Mvc\Dispatcher;
+use Phalcon\DI\FactoryDefault as DiFactory;
+use Phalcon\Config;
+use Core\Exception\ExecutionException;
 
 class Application extends MvcApplication
 {
@@ -80,6 +80,10 @@ class Application extends MvcApplication
         $dispatcher = new Dispatcher();
         $dispatcher->setEventsManager($eventsManager);
         $di->setShared('dispatcher', $dispatcher);
+
+        $loader = new Loader();
+        $loader->register();
+        $di->setShared('loader', $loader);
 
         /**
          * Listen for execution errors.

@@ -16,8 +16,10 @@ class RegisterModulesPathsListener
             foreach ($config['modulePaths'] as $path) {
                 $paths[] = realpath($path);
             }
-            $loader = new Loader();
-            $loader->registerDirs($paths)->register();
+
+            $loader = $application->getDI()->getShared('loader');
+            // True - merges values.
+            $loader->registerDirs($paths, true);
         }
     }
 }

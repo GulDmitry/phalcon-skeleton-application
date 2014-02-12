@@ -39,7 +39,7 @@ class RegisterCLIRoutesListener
                         $routeName
                     ));
                 }
-                if (!isset($routeOptions->defaults->action)) {
+                if (!isset($routeOptions->defaults->description)) {
                     throw new DomainException(sprintf(
                         "Missing 'description' for the route '%s'",
                         $routeName
