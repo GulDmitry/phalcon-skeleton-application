@@ -112,7 +112,7 @@ class Application extends MvcApplication
      * @param string $url optional
      * @return Phalcon\Http\ResponseInterface
      */
-    public function handle($url = '/')
+    public function handle($url = '')
     {
         $eventsManager = $this->getEventsManager();
         $eventsManager->fire('bootstrap:init', $this);
