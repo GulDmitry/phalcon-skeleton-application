@@ -42,7 +42,6 @@ class RegisterTranslationListener
 
         $cacheHelper->setValue('.' . $language, $translations);
 
-        // TODO: CLI task to display all untranslated lables.
         $this->fillDI($application, $translations);
     }
 

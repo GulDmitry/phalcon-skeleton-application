@@ -61,6 +61,14 @@ class Module implements ModuleDefinitionInterface
                             'description' => 'Displays available modules with routes',
                         ],
                     ],
+                    'untranslated-labels' => [
+                        'defaults' => [
+                            'namespace' => 'CLI\Task',
+                            'task' => 'translation',
+                            'action' => 'getUntranslatedlabels',
+                            'description' => 'Compares all labels with default language',
+                        ],
+                    ],
                 ],
             ],
         ];
