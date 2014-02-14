@@ -27,6 +27,8 @@ class Application extends MvcApplication
         'Core\Bootstrap\RegisterAssetsListener',
         'Core\Bootstrap\RegisterUrlListener',
         'Core\Bootstrap\RegisterViewListener',
+        'Core\Bootstrap\RegisterTagListener',
+
         // bootstrap:beforeMergeConfig
 
         // bootstrap:mergeConfig
