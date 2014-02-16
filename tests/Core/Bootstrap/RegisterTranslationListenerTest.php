@@ -29,7 +29,7 @@ class RegisterTranslationListener extends UnitTestCase
             'path' => sys_get_temp_dir() . '/',
             'defaultLanguage' => 'en',
             'languageCache' => [
-                'enabled' => true,
+                'enabled' => false,
                 'lifetime' => 86400,
                 'storage' => [
                     'backend' => '\Phalcon\Cache\Backend\File',
